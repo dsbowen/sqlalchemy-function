@@ -25,12 +25,13 @@ class Function(FunctionMixin, Base):
 Base.metadata.create_all(engine)
 
 """Example 1"""
+print('\nExample 1: Basic use')
+
 def foo(*args, **kwargs):
     print('My arguments are:', args)
     print('My keyword arguments are:', kwargs)
     return 'hello world'
 
-print('\nExample 1: Basic use')
 f = Function(func=foo, args=['hello moon'], kwargs={'hello': 'star'})
 session.add(f)
 session.commit()
