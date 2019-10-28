@@ -43,12 +43,12 @@ class Child(FunctionMixin, Base):
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('parent.id'))
 
-# 4. Define a Parent model with the FunctionBase mixin
+# 1. Define a Parent model with the FunctionBase mixin
 class Parent(FunctionBase, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
 
-    # 5. Fuction models must reference their parent with a 'parent' attribute
+    # 2. Fuction models must reference their parent with a 'parent' attribute
     functions = relationship(
         'Child',
         backref='parent',
@@ -56,7 +56,7 @@ class Parent(FunctionBase, Base):
         collection_class=ordering_list('index')
     )
 
-    # 6. Call _set_function_relationships before setting function attributes
+    # 3. Call _set_function_relationships before setting function attributes
     def __init__(self):
         self._set_function_relationships()
 
@@ -83,7 +83,7 @@ p.functions = foo
 print(p.functions)
 print(p.functions[0]())
 
-print('\nExample 4: Automatic conversion of a list of functions to a list of Function mdoels')
+print('\nExample 4: Automatic conversion of a list of functions to a list of Function models')
 def bar(parent):
     return 'goodbye world'
 
