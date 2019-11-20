@@ -1,8 +1,8 @@
 """SQLAlchemy-Function examples"""
 
 """Setup for Example 1: Basic use"""
-# 1. import FunctionMixin and FunctionBase
-from sqlalchemy_function import FunctionMixin, FunctionBase
+# 1. import FunctionMixin and FunctionRelator
+from sqlalchemy_function import FunctionMixin, FunctionRelator
 
 # 2. Standard session creation
 from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
@@ -43,8 +43,8 @@ class Child(FunctionMixin, Base):
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('parent.id'))
 
-# 1. Define a Parent model with the FunctionBase mixin
-class Parent(FunctionBase, Base):
+# 1. Define a Parent model with the FunctionRelator
+class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
 
@@ -55,10 +55,6 @@ class Parent(FunctionBase, Base):
         order_by='Child.index',
         collection_class=ordering_list('index')
     )
-
-    # 3. Call _set_function_relationships before setting function attributes
-    def __init__(self):
-        self._set_function_relationships()
 
 Base.metadata.create_all(engine)
 

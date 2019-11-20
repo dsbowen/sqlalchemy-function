@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="sqlalchemy-function-dsbowen",
-    version="0.0.1",
+    name="sqlalchemy-function",
+    version="0.0.2",
     author="Dillon Bowen",
     author_email="dsbowen@wharton.upenn.edu",
     description="SQLAlchemy Mixins to store functions for later execution",
