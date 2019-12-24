@@ -46,7 +46,7 @@ class FunctionMixin():
         if self.func is None:
             return
         if hasattr(self, 'parent'):
-            return self.func(self.parent, *self.args, **self.kwargs)
+            return self.func(self.parent, *self.args, **self.kwargs.unshell())
         return self.func(*self.args, **self.kwargs)
 
 

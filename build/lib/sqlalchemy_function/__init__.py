@@ -1,8 +1,8 @@
 """SQLAlchemy-Function
 
-This module defines a FunctionMixin and FunctionBase. The FunctionMixin is a 
-mixin for creating Function models. The FunctionBase is a base mixin for 
-models which are parents of Function models.
+This module defines a FunctionMixin and FunctionRelator. The FunctionMixin 
+is a mixin for creating Function models. The FunctionRelator is a base for 
+models which relate to Function models.
 """
 
 from sqlalchemy import Column, Integer, PickleType
@@ -50,48 +50,70 @@ class FunctionMixin():
         return self.func(*self.args, **self.kwargs)
 
 
-class FunctionBase():
-    """Function base mixin
+class FunctionRelator():
+    """FunctionRelator base
 
-    Models which are parents of Function models should inherit this base. 
-    They should call _set_function_relationships before any Function 
-    attributes are set.
-    
-    Users can then set function attributes to functions or function models. 
-    When set to functions, FunctionBase will automatically convert the
-    functions to Function models.
-
-    e.g. the following commands are equivalent:
-    model.function = function 
-    model.function = Function(parent=model, func=function)
-
-    Similar logic applies to lists. e.g. the following are equivalent:
-    model.functions = function
-    model.functions = [function]
-    model.functions = Function(parent=model, func=function)
-    model.functions = [Function(parent=model, func=function)]
+    The FunctionRelator can be subclassed for models which have relationships to Function models. It provides automatic conversion of functions to Function models when setting attributes.
     """
-    _function_relationships = Column(PickleType)
-    
+    _exempt_attrs_fr = ['_func_rel_indicator', '_func_rel_attrs']
+
+    def __new__(cls, *args, **kwargs):
+        """
+        Set class function relationship indicators and attributes.
+
+        func_rel_indicator maps attribute names to indicators that the 
+        attribute is a relationship to Function models.
+
+        func_rel_attrs maps a function relationship name to a 
+        (model_class, uselist) tuple.
+        """
+        if not hasattr(cls, '_func_rel_indicator'):
+            cls._func_rel_indicator = {}
+            cls._func_rel_attrs = {}
+        try:
+            return super().__new__(cls, *args, **kwargs)
+        except:
+            return super().__new__(cls)
+
     def __setattr__(self, name, value):
+        """Set attribute
+
+        Before setting an attribute, determine if it the attribute is a relationship to a Function model. If so, convert the value from a function(s) to a Function model(s).
         """
-        Convert value to Function model if setting a function relationship
-        """
-        if name == '_sa_instance_state':
+        if name in self._exempt_attrs_fr:
             return super().__setattr__(name, value)
-        function_relationships = self._function_relationships or []
-        if name in function_relationships:
-            relationship = inspect(self).mapper.relationships[name]
-            model_class = relationship.mapper.class_
-            if relationship.uselist:
-                value = value if isinstance(value, list) else [value]
+        is_func_rel = self._func_rel_indicator.get(name)
+        if is_func_rel is None:
+            is_func_rel = self._set_func_rel(name)
+        if is_func_rel:
+            model_class, use_list = self._func_rel_attrs[name]
+            if use_list:
                 value = self._to_function_models(value, model_class)
             else:
                 value = self._to_function_model(value, model_class)
-        return super().__setattr__(name, value)
+        super().__setattr__(name, value)
 
+    @classmethod
+    def _set_func_rel(cls, name):
+        """
+        Set the function relationship status for a previously unseen 
+        attribute.
+        """
+        mapper = inspect(cls).mapper
+        rel = [r for r in mapper.relationships if r.key == name]
+        if not (rel and FunctionMixin in rel[0].mapper.class_.__mro__):
+            is_func_rel = False
+        else:
+            rel = rel[0]
+            cls._func_rel_attrs[name] = (rel.mapper.class_, rel.uselist)
+            is_func_rel = True
+        cls._func_rel_indicator[name] = is_func_rel
+        return is_func_rel
+    
     def _to_function_models(self, funcs, model_class):
         """Convert a list of functions to Function models"""
+        if not isinstance(funcs, list):
+            funcs = [funcs]
         models = [self._to_function_model(f, model_class) for f in funcs]
         return [m for m in models if m is not None]
     
@@ -106,15 +128,3 @@ class FunctionBase():
         raise ValueError(
             'Function relationships requre Function models or callables'
         )
-
-    def _set_function_relationships(self):
-        """Find and store all function relationships
-        
-        Models which inherit from FunctionModelBase should call this 
-        before function attributes are assigned.
-        """
-        relationships = inspect(self).mapper.relationships
-        self._function_relationships = [
-            r.key for r in relationships 
-            if FunctionMixin in r.mapper.class_.__mro__
-        ]
