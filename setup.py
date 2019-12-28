@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sqlalchemy-function",
-    version="0.0.2",
+    version="0.0.3",
     author="Dillon Bowen",
     author_email="dsbowen@wharton.upenn.edu",
-    description="SQLAlchemy Mixins to store functions for later execution",
+    description="Bases and Mixins to store functions for later execution",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dsbowen/sqlalchemy-function",

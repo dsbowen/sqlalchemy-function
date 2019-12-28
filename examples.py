@@ -1,8 +1,8 @@
 """SQLAlchemy-Function examples"""
 
 """Setup for Example 1: Basic use"""
-# 1. import FunctionMixin and FunctionRelator
-from sqlalchemy_function import FunctionMixin, FunctionRelator
+# 1. import FunctionMixin, FunctionRegistrar, and FunctionRelator
+from sqlalchemy_function import FunctionMixin, FunctionRegistrar, FunctionRelator
 
 # 2. Standard session creation
 from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
@@ -37,7 +37,7 @@ session.add(f)
 session.commit()
 print(f())
 
-"""Additional Setup for Examples 2-4: Function parents"""
+"""Additional Setup for Example 2: Function parents"""
 class Child(FunctionMixin, Base):
     __tablename__ = 'child'
     id = Column(Integer, primary_key=True)
@@ -48,7 +48,7 @@ class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
 
-    # 2. Fuction models must reference their parent with a 'parent' attribute
+    # 2. Fuction models must reference their parent with a `parent` attribute
     functions = relationship(
         'Child',
         backref='parent',
@@ -73,13 +73,33 @@ f = Function(
 )
 print(f())
 
-print('\nExample 3: Automatic conversion of functions to Function models')
+"""Additional Setup for Example 3: Function registrars"""
+# 1. Define a registrar by subclassing `FunctionRegistrar`
+class Registrar(FunctionRegistrar):
+    # 2. Registrars reference their associated Function model with the 
+    # `function_model` attribute
+    function_model = Child
+
+@Registrar.register
+def foo(parent, *args, **kwargs):
+    print('My parent is:', parent)
+    print('My args are:', args)
+    print('My kwargs are:', kwargs)
+    return 'hello world'
+
+print('\nExample 3: Using a Registrar for simplified syntax')
+p.functions.clear()
+Registrar.foo(p, 'hello moon', hello='star')
+print(p.functions)
+print(p.functions[0]())
+
+print('\nExample 4: Automatic conversion of functions to Function models')
 p.functions.clear()
 p.functions = foo
 print(p.functions)
 print(p.functions[0]())
 
-print('\nExample 4: Automatic conversion of a list of functions to a list of Function models')
+print('\nExample 5: Automatic conversion of a list of functions to a list of Function models')
 def bar(parent):
     return 'goodbye world'
 
