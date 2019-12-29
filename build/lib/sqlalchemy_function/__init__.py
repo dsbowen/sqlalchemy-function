@@ -1,8 +1,10 @@
 """SQLAlchemy-Function
 
-This module defines a FunctionMixin and FunctionRelator. The FunctionMixin 
-is a mixin for creating Function models. The FunctionRelator is a base for 
-models which relate to Function models.
+This module defines the following bases:
+
+1. `FunctionMixin`: for creating Function models.
+2. `FunctionRegistrar`: simplifies syntax for creating Function models.
+3. `FunctionRelator`:  a base for models which relate to Function models.
 """
 
 from sqlalchemy import Column, Integer, PickleType
@@ -13,7 +15,7 @@ from sqlalchemy_mutable import MutableListType, MutableDictType
 class FunctionMixin():
     """Mixin for Function models
 
-    A Function model has a parent, a function, args, and kwargs. When called
+    A Function model has a parent, a function, args, and kwargs. When called,
     the Function model executes its function, passing in its parent (if 
     applicable) and its args and kwargs.
 
@@ -46,14 +48,32 @@ class FunctionMixin():
         if self.func is None:
             return
         if hasattr(self, 'parent'):
-            return self.func(self.parent, *self.args, **self.kwargs)
+            return self.func(self.parent, *self.args, **self.kwargs.unshell())
         return self.func(*self.args, **self.kwargs)
 
 
+class FunctionRegistrar():
+    """FunctionRegistrar base
+
+    The FunctionRegistrar simplifies the syntax for creating Function 
+    models and associating them with their parents. Registrars require a 
+    `function_model` attribute indicating the Function model they attach to a
+    parent.
+    """
+    @classmethod
+    def register(cls, func):
+        def add_function(parent, *args, **kwargs):
+            cls.function_model(parent, func, list(args), kwargs)
+        setattr(cls, func.__name__, add_function)
+        return func
+
+        
 class FunctionRelator():
     """FunctionRelator base
 
-    The FunctionRelator can be subclassed for models which have relationships to Function models. It provides automatic conversion of functions to Function models when setting attributes.
+    The FunctionRelator can be subclassed for models which have 
+    relationships to Function models. It provides automatic conversion of 
+    functions to Function models when setting attributes.
     """
     _exempt_attrs_fr = ['_func_rel_indicator', '_func_rel_attrs']
 

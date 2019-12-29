@@ -1,8 +1,8 @@
 """SQLAlchemy-Function examples"""
 
 """Setup for Example 1: Basic use"""
-# 1. import FunctionMixin, FunctionRegistrar, and FunctionRelator
-from sqlalchemy_function import FunctionMixin, FunctionRegistrar, FunctionRelator
+# 1. import FunctionMixin
+from sqlalchemy_function import FunctionMixin
 
 # 2. Standard session creation
 from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
@@ -37,18 +37,21 @@ session.add(f)
 session.commit()
 print(f())
 
-"""Additional Setup for Example 2: Function parents"""
+"""Additional Setup for Examples 2-5"""
+# 1. Import `FunctionRelator`
+from sqlalchemy_function import FunctionRelator
+
 class Child(FunctionMixin, Base):
     __tablename__ = 'child'
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('parent.id'))
 
-# 1. Define a Parent model with the FunctionRelator
+# 2. Define a Parent model with the FunctionRelator
 class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
 
-    # 2. Fuction models must reference their parent with a `parent` attribute
+    # 3. Fuction models must reference their parent with a `parent` attribute
     functions = relationship(
         'Child',
         backref='parent',
@@ -73,23 +76,16 @@ f = Function(
 )
 print(f())
 
-"""Additional Setup for Example 3: Function registrars"""
-# 1. Define a registrar by subclassing `FunctionRegistrar`
-class Registrar(FunctionRegistrar):
-    # 2. Registrars reference their associated Function model with the 
-    # `function_model` attribute
-    function_model = Child
-
-@Registrar.register
+print('\nExample 3: Function registrarion')
+@Child.register
 def foo(parent, *args, **kwargs):
     print('My parent is:', parent)
     print('My args are:', args)
     print('My kwargs are:', kwargs)
     return 'hello world'
 
-print('\nExample 3: Using a Registrar for simplified syntax')
 p.functions.clear()
-Registrar.foo(p, 'hello moon', hello='star')
+Child.foo(p, 'hello moon', hello='star')
 print(p.functions)
 print(p.functions[0]())
 

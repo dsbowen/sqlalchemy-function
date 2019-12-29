@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: sqlalchemy-function
-Version: 0.0.2
-Summary: SQLAlchemy Mixins to store functions for later execution
+Version: 0.0.3
+Summary: Bases and Mixins to store functions for later execution
 Home-page: https://github.com/dsbowen/sqlalchemy-function
 Author: Dillon Bowen
 Author-email: dsbowen@wharton.upenn.edu
@@ -44,11 +44,11 @@ Description: # SQLAlchemy-Function
         
         ## License
         
-        Publications which use this software should include the following citation for SQLAlchemy-Function and its dependency, [SQLAlchemy-Mutable](https://pypi.org/project/sqlalchemy-mutable/):
+        Publications which use this software should include the following citation for SQLAlchemy-Function and its dependency, [SQLAlchemy-Mutable](https://dsbowen.github.io/sqlalchemy-mutable):
         
-        Bowen, D.S. (2019). SQLAlchemy-Function \[Computer software\]. [https://github.com/dsbowen/sqlalchemy-functionv](https://github.com/dsbowen/sqlalchemy-function)
+        Bowen, D.S. (2019). SQLAlchemy-Function \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-function](https://dsbowen.github.io/sqlalchemy-function)
         
-        Bowen, D.S. (2019). SQLAlchemy-Mutable \[Computer software\]. [https://github.com/dsbowen/sqlalchemy-mutable](https://github.com/dsbowen/sqlalchemy-mutable)
+        Bowen, D.S. (2019). SQLAlchemy-Mutable \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-mutable](https://dsbowen.github.io/sqlalchemy-mutable)
         
         This project is licensed under the MIT License [LICENSE](https://github.com/dsbowen/sqlalchemy-function/blob/master/LICENSE).
 Platform: UNKNOWN
