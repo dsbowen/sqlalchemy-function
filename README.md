@@ -38,8 +38,8 @@ You can find the latest documentation at [https://dsbowen.github.io/sqlalchemy-f
 
 Publications which use this software should include the following citation for SQLAlchemy-Function and its dependency, [SQLAlchemy-Mutable](https://dsbowen.github.io/sqlalchemy-mutable):
 
-Bowen, D.S. (2019). SQLAlchemy-Function \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-function](https://dsbowen.github.io/sqlalchemy-function)
+Bowen, D.S. (2019). SQLAlchemy-Function \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-function](https://dsbowen.github.io/sqlalchemy-function).
 
-Bowen, D.S. (2019). SQLAlchemy-Mutable \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-mutable](https://dsbowen.github.io/sqlalchemy-mutable)
+Bowen, D.S. (2019). SQLAlchemy-Mutable \[Computer software\]. [https://dsbowen.github.io/sqlalchemy-mutable](https://dsbowen.github.io/sqlalchemy-mutable).
 
 This project is licensed under the MIT License [LICENSE](https://github.com/dsbowen/sqlalchemy-function/blob/master/LICENSE).

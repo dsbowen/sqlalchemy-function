@@ -3,8 +3,7 @@
 This module defines the following bases:
 
 1. `FunctionMixin`: for creating Function models.
-2. `FunctionRegistrar`: simplifies syntax for creating Function models.
-3. `FunctionRelator`:  a base for models which relate to Function models.
+2. `FunctionRelator`: a base for models which relate to Function models.
 """
 
 from sqlalchemy import Column, Integer, PickleType
@@ -25,6 +24,18 @@ class FunctionMixin():
     _func = Column(PickleType)
     args = Column(MutableListType)
     kwargs = Column(MutableDictType)
+
+    @classmethod
+    def register(cls, func):
+        """Register a function
+
+        This method simplifies the syntax for creating Function models and 
+        associating them with their parents.
+        """
+        def add_function(parent, *args, **kwargs):
+            cls(parent, func, list(args), kwargs)
+        setattr(cls, func.__name__, add_function)
+        return func
 
     @property
     def func(self):
@@ -50,22 +61,6 @@ class FunctionMixin():
         if hasattr(self, 'parent'):
             return self.func(self.parent, *self.args, **self.kwargs.unshell())
         return self.func(*self.args, **self.kwargs)
-
-
-class FunctionRegistrar():
-    """FunctionRegistrar base
-
-    The FunctionRegistrar simplifies the syntax for creating Function 
-    models and associating them with their parents. Registrars require a 
-    `function_model` attribute indicating the Function model they attach to a
-    parent.
-    """
-    @classmethod
-    def register(cls, func):
-        def add_function(parent, *args, **kwargs):
-            cls.function_model(parent, func, list(args), kwargs)
-        setattr(cls, func.__name__, add_function)
-        return func
 
         
 class FunctionRelator():

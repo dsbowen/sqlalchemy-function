@@ -24,7 +24,7 @@ class Function(FunctionMixin, Base):
 # 4. Create the database
 Base.metadata.create_all(engine)
 
-"""Example 1"""
+"""Examples"""
 print('\nExample 1: Basic use')
 
 def foo(*args, **kwargs):
@@ -76,8 +76,8 @@ f = Function(
 )
 print(f())
 
-print('\nExample 3: Function registrarion')
-@Child.register
+print('\nExample 3: Function registration')
+@Child.register # register the function with the `Function` model
 def foo(parent, *args, **kwargs):
     print('My parent is:', parent)
     print('My args are:', args)
@@ -85,6 +85,7 @@ def foo(parent, *args, **kwargs):
     return 'hello world'
 
 p.functions.clear()
+# storing a function resembles an ordinary function call
 Child.foo(p, 'hello moon', hello='star')
 print(p.functions)
 print(p.functions[0]())
