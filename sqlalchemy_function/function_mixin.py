@@ -50,10 +50,9 @@ class FunctionMixin():
     ```python
     from sqlalchemy_function import FunctionMixin, FunctionRelator
 
-    from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
+    from sqlalchemy import create_engine, Column, ForeignKey, Integer
     from sqlalchemy.orm import relationship, sessionmaker, scoped_session
     from sqlalchemy.ext.declarative import declarative_base
-    from sqlalchemy.ext.orderinglist import ordering_list
 
     # standard session creation
     engine = create_engine('sqlite:///:memory:')

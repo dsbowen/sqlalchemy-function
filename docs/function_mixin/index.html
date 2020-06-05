@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Function mixin - SQLAlchemy-Function</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Function mixin";
+    var mkdocs_page_input_path = "function_mixin.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> SQLAlchemy-Function</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../index.md">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Function mixin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sqlalchemy_functionfunctionmixin">sqlalchemy_function.FunctionMixin</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples_1">Examples</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../function_relator/">Function relator</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">SQLAlchemy-Function</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Function mixin</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/dsbowen/sqlalchemy-function/edit/master/docs_md/function_mixin.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
+<style>
+    a.src-href {
+        float: right;
+    }
+    p.attr {
+        margin-top: 0.5em;
+        margin-left: 1em;
+    }
+    p.func-header {
+        background-color: gainsboro;
+        border-radius: 0.1em;
+        padding: 0.5em;
+        padding-left: 1em;
+    }
+    table.field-table {
+        border-radius: 0.1em
+    }
+</style>
+
+<h1 id="function-mixin">Function mixin</h1>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+
+    </tbody>
+</table>
+
+<h2 id="sqlalchemy_functionfunctionmixin">sqlalchemy_function.<strong>FunctionMixin</strong></h2>
+<p class="func-header">
+    <i>class</i> sqlalchemy_function.<b>FunctionMixin</b>(<i>parent=None, func=None, args=[], kwargs={}</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L8">[source]</a>
+</p>
+
+<p>A mixin for 'Function models'. When called, a Function model executes its
+function, passing in its parent (if applicable) and its args and kwargs.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>parent : <i>usually a database model or None, default=None</i></b>
+<p class="attr">
+    The Function model's parent is usually a database model which subclasses a <code>sqlalchemy.ext.declarative.declarative_base()</code>.
+</p>
+<b>func : <i>callable or None, default=None</i></b>
+<p class="attr">
+    The function which the Function model will execute when called.
+</p>
+<b>args : <i>iterable, default=[]</i></b>
+<p class="attr">
+    Arguments which the Function model will pass into its <code>func</code> when called.
+</p>
+<b>kwargs : <i>dict, default={}</i></b>
+<p class="attr">
+    Keyword arguments which the Function model will pass into its <code>func</code> when called.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Attributes:</b></td>
+    <td class="field-body" width="100%"><b>parent : <i>usually a database model of None</i></b>
+<p class="attr">
+    Set from the <code>parent</code> parameter.
+</p>
+<b>func : <i>callable sqlalchemy.PickleType</i></b>
+<p class="attr">
+    Set from the <code>func</code> parameter.
+</p>
+<b>args : <i>sqlalchemy_mutable.MutableListType</i></b>
+<p class="attr">
+    Set from the <code>args</code> parameter.
+</p>
+<b>kwargs : <i>sqlalchemy_mutable.MutableDictType</i></b>
+<p class="attr">
+    Set from the <code>kwargs</code> parameter.
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+<h4 id="examples">Examples</h4>
+<p>In the setup, we create a SQLAlchemy session, define a Parent model
+subclassing <code>FunctionRelator</code>, and a Function model subclassing
+<code>FunctionMixin</code>.</p>
+<pre><code class="python">from sqlalchemy_function import FunctionMixin, FunctionRelator
+
+from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship, sessionmaker, scoped_session
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.orderinglist import ordering_list
+
+# standard session creation
+engine = create_engine('sqlite:///:memory:')
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
+session = Session()
+Base = declarative_base()
+
+# define a Parent model with the FunctionRelator
+class Parent(FunctionRelator, Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+
+    # Fuction models must reference their parent with a `parent` attribute
+    functions = relationship('Function', backref='parent')
+
+# define a Function model with the FunctionMixin
+class Function(FunctionMixin, Base):
+    __tablename__ = 'function'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+
+Base.metadata.create_all(engine)
+</code></pre>
+
+<p>We can now store and later call functions as follows.</p>
+<pre><code class="python">def foo(parent, *args, **kwargs):
+    print('My parent is', parent)
+    print('My args are', args)
+    print('My kwargs are', kwargs)
+    return 'return value'
+
+parent = Parent()
+function = Function(
+    parent, func=foo, args=['hello world'], kwargs={'goodbye': 'moon'}
+)
+parent.functions[0]()
+</code></pre>
+
+<p>Out:</p>
+<pre><code>My parent is &lt;__main__.Parent object at 0x7f2bb5c12518&gt;
+My args are ('hello world',)
+My kwargs are {'goodbye': 'moon'}
+'return value'
+</code></pre>
+
+<h4 id="methods">Methods</h4>
+<p class="func-header">
+    <i></i> <b>register</b>(<i>cls, func</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L118">[source]</a>
+</p>
+
+<p>Class method which registers a function with the Function model. This simplifies the syntax for creating Function models and associating them with their parents.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>func : <i>callable</i></b>
+<p class="attr">
+    The registered function.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>func : <i>callable</i></b>
+<p class="attr">
+    Original <code>func</code> parameter.
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+<h4 id="examples_1">Examples</h4>
+<p>Follow the setup above.</p>
+<pre><code class="python">@Function.register
+def foo(parent, *args, **kwargs):
+    print('My parent is', parent)
+    print('My args are', args)
+    print('My kwargs are', kwargs)
+    return 'return value'
+
+parent = Parent()
+Function.foo(parent, 'hello world', goodbye='moon')
+parent.functions[0]()
+</code></pre>
+
+<p>Out:</p>
+<pre><code>My parent is &lt;__main__.Parent object at 0x7f2bc4269588&gt;
+My args are ('hello world',)
+My kwargs are {'goodbye': 'moon'}
+'return value'
+</code></pre>
+
+<p class="func-header">
+    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L164">[source]</a>
+</p>
+
+<p>Call <code>self.func</code>, passing in <code>self.parent</code> (if applicable) and
+<code>*self.args, **self.kwargs</code>.</p>
+<p><strong>Note.</strong> If the arguments or keyword arguments contain database models,
+they will be 'unshelled' when they are passed into the function. See
+<a href="https://dsbowen.github.io/sqlalchemy-mutable">https://dsbowen.github.io/sqlalchemy-mutable</a> for more detail.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>output : <i></i></b>
+<p class="attr">
+    Output of <code>self.func</code>.
+</p></td>
+</tr>
+    </tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../function_relator/" class="btn btn-neutral float-right" title="Function relator">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dsbowen/sqlalchemy-function/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="../function_relator/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
