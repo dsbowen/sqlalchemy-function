@@ -5,27 +5,27 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
   
   
-  
-  <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Function relator - SQLAlchemy-Function</title>
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>SQLAlchemy-Function</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../css/theme.css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
-  <link href="../css/extra.css" rel="stylesheet" />
+  <link href="css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Function relator";
-    var mkdocs_page_input_path = "function_relator.md";
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = null;
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
@@ -39,29 +39,35 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> SQLAlchemy-Function</a>
+        <a href="." class="icon icon-home"> SQLAlchemy-Function</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../function_mixin/">Function mixin</a>
-                    </li>
-                </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Function relator</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
     </li>
     </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="function_mixin/">Function mixin</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="function_relator/">Function relator</a>
                     </li>
                 </ul>
       </div>
@@ -73,7 +79,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">SQLAlchemy-Function</a>
+        <a href=".">SQLAlchemy-Function</a>
       </nav>
 
       
@@ -81,14 +87,14 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="..">Docs</a> &raquo;</li>
+    <li><a href=".">Docs</a> &raquo;</li>
     
       
     
-    <li>Function relator</li>
+    <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/dsbowen/sqlalchemy-function/edit/master/docs_md/function_relator.md"
+        <a href="https://github.com/dsbowen/sqlalchemy-function/edit/master/docs_md/index.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -99,42 +105,16 @@
           <div role="main">
             <div class="section">
               
-                <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+                <h1 id="sqlalchemy-function">SQLAlchemy-Function</h1>
+<p>SQLAlchemy-Function defines a <a href="https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/mixins.html">SQLALchemy Mixin</a> for creating Function models.</p>
+<p>A Function model has a parent (optional), a function, arguments, and keyword arguments. When called, the Function model executes its function, passing in its parent (if applicable), its arguments, and its keyword arguments.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>$ pip install sqlalchemy-function
+</code></pre>
 
-<p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
-<style>
-    a.src-href {
-        float: right;
-    }
-    p.attr {
-        margin-top: 0.5em;
-        margin-left: 1em;
-    }
-    p.func-header {
-        background-color: gainsboro;
-        border-radius: 0.1em;
-        padding: 0.5em;
-        padding-left: 1em;
-    }
-    table.field-table {
-        border-radius: 0.1em
-    }
-</style>
-
-<h2 id="sqlalchemy_functionfunctionrelator">sqlalchemy_function.<strong>FunctionRelator</strong></h2>
-<p>Base for database models with relationships to Function models. It provides
-automatic conversion of functions to Function models when setting attributes.</p>
-<table class="docutils field-list field-table" frame="void" rules="none">
-    <col class="field-name" />
-    <col class="field-body" />
-    <tbody valign="top">
-
-    </tbody>
-</table>
-
-<h4 id="examples">Examples</h4>
-<p>In the setup, we create a SQLAlchemy session, define a Parent model
-subclassing <code>FunctionRelator</code>, and a Function model subclassing
+<h2 id="quickstart">Quickstart</h2>
+<p>In the setup, we create a SQLAlchemy session, define a Parent model 
+subclassing <code>FunctionRelator</code>, and a Function model subclassing 
 <code>FunctionMixin</code>.</p>
 <pre><code class="python">from sqlalchemy_function import FunctionMixin, FunctionRelator
 
@@ -149,7 +129,7 @@ Session = scoped_session(session_factory)
 session = Session()
 Base = declarative_base()
 
-# define a Parent model with the FunctionRelator
+# define a Function model parent
 class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
@@ -166,23 +146,38 @@ class Function(FunctionMixin, Base):
 Base.metadata.create_all(engine)
 </code></pre>
 
-<p>We can now set the <code>functions</code> attribute to a callable as follows.</p>
-<pre><code class="python">def foo(parent, *args, **kwargs):
+<p>We can now register, store, and call functions as follows.</p>
+<pre><code class="python">@Function.register
+def foo(parent, *args, **kwargs):
     print('My parent is', parent)
     print('My args are', args)
     print('My kwargs are', kwargs)
     return 'return value'
 
-parent.functions = foo
-# equivalent to:
-# parent.functions = [foo]
-# parent.functions = Function(func=foo)
-print(parent.functions)
+parent = Parent()
+Function.foo(parent, 'hello world', goodbye='moon')
+parent.functions[0]()
 </code></pre>
 
 <p>Out:</p>
-<pre><code>[&lt;__main__.Function object at 0x7f4e5a49c160&gt;]
+<pre><code>My parent is &lt;__main__.Parent object at 0x7f8b4d200518&gt;
+My args are ('hello world',)
+My kwargs are {'goodbye': 'moon'}
+'return value'
 </code></pre>
+
+<h2 id="citation">Citation</h2>
+<pre><code>@software{bowen2020sqlalchemy-function,
+  author = {Dillon Bowen},
+  title = {SQLAlchemy-Function},
+  url = {https://dsbowen.github.io/sqlalchemy-function/},
+  date = {2020-06-05},
+}
+</code></pre>
+
+<h2 id="license">License</h2>
+<p>Users must cite this package in any publications which use it.</p>
+<p>It is licensed with the MIT <a href="https://github.com/dsbowen/sqlalchemy-function/blob/master/LICENSE">License</a>.</p>
               
             </div>
           </div>
@@ -190,8 +185,8 @@ print(parent.functions)
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="function_mixin/" class="btn btn-neutral float-right" title="Function mixin">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../function_mixin/" class="btn btn-neutral" title="Function mixin"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -219,14 +214,14 @@ print(parent.functions)
           <a href="https://github.com/dsbowen/sqlalchemy-function/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../function_mixin/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+        <span style="margin-left: 15px"><a href="function_mixin/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
@@ -235,3 +230,8 @@ print(parent.functions)
 
 </body>
 </html>
+
+<!--
+MkDocs version : 1.1.1
+Build Date UTC : 2020-06-05 18:31:37.200814+00:00
+-->

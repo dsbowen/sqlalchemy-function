@@ -94,10 +94,9 @@ subclassing `FunctionRelator`, and a Function model subclassing
 ```python
 from sqlalchemy_function import FunctionMixin, FunctionRelator
 
-from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
+from sqlalchemy import create_engine, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext.orderinglist import ordering_list
 
 # standard session creation
 engine = create_engine('sqlite:///:memory:')
@@ -153,7 +152,7 @@ My kwargs are {'goodbye': 'moon'}
 
 
 <p class="func-header">
-    <i></i> <b>register</b>(<i>cls, func</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L118">[source]</a>
+    <i></i> <b>register</b>(<i>cls, func</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L117">[source]</a>
 </p>
 
 Class method which registers a function with the Function model. This simplifies the syntax for creating Function models and associating them with their parents.
@@ -208,7 +207,7 @@ My kwargs are {'goodbye': 'moon'}
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L164">[source]</a>
+    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L163">[source]</a>
 </p>
 
 Call `self.func`, passing in `self.parent` (if applicable) and

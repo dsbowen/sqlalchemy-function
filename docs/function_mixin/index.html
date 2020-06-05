@@ -49,7 +49,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 <ul>
-                    <li class="toctree-l1"><a class="" href="../index.md">Home</a>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                     </li>
                 </ul>
                 <ul class="current">
@@ -196,10 +196,9 @@ subclassing <code>FunctionRelator</code>, and a Function model subclassing
 <code>FunctionMixin</code>.</p>
 <pre><code class="python">from sqlalchemy_function import FunctionMixin, FunctionRelator
 
-from sqlalchemy import create_engine, Column, ForeignKey, Integer, String
+from sqlalchemy import create_engine, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext.orderinglist import ordering_list
 
 # standard session creation
 engine = create_engine('sqlite:///:memory:')
@@ -248,7 +247,7 @@ My kwargs are {'goodbye': 'moon'}
 
 <h4 id="methods">Methods</h4>
 <p class="func-header">
-    <i></i> <b>register</b>(<i>cls, func</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L118">[source]</a>
+    <i></i> <b>register</b>(<i>cls, func</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L117">[source]</a>
 </p>
 
 <p>Class method which registers a function with the Function model. This simplifies the syntax for creating Function models and associating them with their parents.</p>
@@ -295,7 +294,7 @@ My kwargs are {'goodbye': 'moon'}
 </code></pre>
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L164">[source]</a>
+    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L163">[source]</a>
 </p>
 
 <p>Call <code>self.func</code>, passing in <code>self.parent</code> (if applicable) and
@@ -326,6 +325,8 @@ they will be 'unshelled' when they are passed into the function. See
         <a href="../function_relator/" class="btn btn-neutral float-right" title="Function relator">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
     </div>
   
 
@@ -351,6 +352,8 @@ they will be 'unshelled' when they are passed into the function. See
       
           <a href="https://github.com/dsbowen/sqlalchemy-function/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../function_relator/" style="color: #fcfcfc">Next &raquo;</a></span>
