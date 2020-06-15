@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sqlalchemy-function",
-    version="0.0.7",
+    version="0.0.8",
     author="Dillon Bowen",
     author_email="dsbowen@wharton.upenn.edu",
     description="Bases and Mixins to store functions for later execution",

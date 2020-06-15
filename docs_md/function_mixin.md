@@ -52,7 +52,7 @@ function, passing in its arguments and keyword arguments.
 </p>
 <b>*args, **kwargs : <i></i></b>
 <p class="attr">
-    Arguments and keyword arguments which the Function model will pass into its <code>func</code> when called.
+    Arguments and keyword arguments which the Function model will pass into its <code>func</code> when called. The <code>FunctionMixin</code> constructor will not override arguments and keyword arguments if they have already been set.
 </p></td>
 </tr>
 <tr class="field">
@@ -125,7 +125,7 @@ My kwargs are {'goodbye': 'moon'}
 
 
 <p class="func-header">
-    <i></i> <b>set</b>(<i>self, func, *args, **kwargs</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L88">[source]</a>
+    <i></i> <b>set</b>(<i>self, func, *args, **kwargs</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L93">[source]</a>
 </p>
 
 Set the function, arguments, and keyword arguments.
@@ -160,7 +160,7 @@ Set the function, arguments, and keyword arguments.
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L108">[source]</a>
+    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L113">[source]</a>
 </p>
 
 Call `self.func`, passing in `*self.args, **self.kwargs`.

@@ -17,7 +17,9 @@ class FunctionMixin():
 
     \*args, \*\*kwargs :
         Arguments and keyword arguments which the Function model will pass 
-        into its `func` when called.
+        into its `func` when called. The `FunctionMixin` constructor will not
+        override arguments and keyword arguments if they have already been
+        set.
 
     Attributes
     ----------
@@ -82,7 +84,10 @@ class FunctionMixin():
     kwargs = Column(MutableDictType)
 
     def __init__(self, func, *args, **kwargs):
-        self.set(func, *args, **kwargs)
+        self.func = func
+        # note that args or kwargs may have already been set
+        self.args = self.args or list(args)
+        self.kwargs = self.kwargs or kwargs
         super().__init__()
 
     def set(self, func, *args, **kwargs):
