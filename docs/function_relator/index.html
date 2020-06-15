@@ -59,7 +59,11 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Function relator</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+    <li class="toctree-l2"><a class="reference internal" href="#sqlalchemy_functionfunctionrelator">sqlalchemy_function.FunctionRelator</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -121,9 +125,19 @@
     }
 </style>
 
+<h1 id="function-relator-mixin">Function relator mixin</h1>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+
+    </tbody>
+</table>
+
 <h2 id="sqlalchemy_functionfunctionrelator">sqlalchemy_function.<strong>FunctionRelator</strong></h2>
-<p>Base for database models with relationships to Function models. It provides
-automatic conversion of functions to Function models when setting attributes.</p>
+<p>Base for database models with relationships to Function models. It
+provides automatic conversion of functions to Function models when
+setting attributes.</p>
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
     <col class="field-body" />
@@ -138,26 +152,24 @@ subclassing <code>FunctionRelator</code>, and a Function model subclassing
 <code>FunctionMixin</code>.</p>
 <pre><code class="python">from sqlalchemy_function import FunctionMixin, FunctionRelator
 
+# standard session creation
 from sqlalchemy import create_engine, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
-# standard session creation
 engine = create_engine('sqlite:///:memory:')
 session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
 session = Session()
 Base = declarative_base()
 
-# define a Parent model with the FunctionRelator
+# subclass `FunctionRelator` for models with a relationship to Function models
 class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
-
-    # Fuction models must reference their parent with a `parent` attribute
     functions = relationship('Function', backref='parent')
 
-# define a Function model with the FunctionMixin
+# subclass `FunctionMixin` to define a Function model
 class Function(FunctionMixin, Base):
     __tablename__ = 'function'
     id = Column(Integer, primary_key=True)
@@ -167,17 +179,18 @@ Base.metadata.create_all(engine)
 </code></pre>
 
 <p>We can now set the <code>functions</code> attribute to a callable as follows.</p>
-<pre><code class="python">def foo(parent, *args, **kwargs):
-    print('My parent is', parent)
+<pre><code class="python">def foo(*args, **kwargs):
     print('My args are', args)
     print('My kwargs are', kwargs)
     return 'return value'
 
+parent = Parent()
 parent.functions = foo
 # equivalent to:
 # parent.functions = [foo]
-# parent.functions = Function(func=foo)
-print(parent.functions)
+# parent.functions = Function(foo)
+# parent.functions = [Function(foo)]
+parent.functions
 </code></pre>
 
 <p>Out:</p>

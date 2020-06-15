@@ -19,12 +19,25 @@
     table.field-table {
         border-radius: 0.1em
     }
-</style>##sqlalchemy_function.**FunctionRelator**
+</style># Function relator mixin
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        
+    </tbody>
+</table>
 
 
 
-Base for database models with relationships to Function models. It provides
-automatic conversion of functions to Function models when setting attributes.
+##sqlalchemy_function.**FunctionRelator**
+
+
+
+Base for database models with relationships to Function models. It
+provides automatic conversion of functions to Function models when
+setting attributes.
 
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
@@ -43,26 +56,24 @@ subclassing `FunctionRelator`, and a Function model subclassing
 ```python
 from sqlalchemy_function import FunctionMixin, FunctionRelator
 
+# standard session creation
 from sqlalchemy import create_engine, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
-# standard session creation
 engine = create_engine('sqlite:///:memory:')
 session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
 session = Session()
 Base = declarative_base()
 
-# define a Parent model with the FunctionRelator
+# subclass `FunctionRelator` for models with a relationship to Function models
 class Parent(FunctionRelator, Base):
     __tablename__ = 'parent'
     id = Column(Integer, primary_key=True)
-
-    # Fuction models must reference their parent with a `parent` attribute
     functions = relationship('Function', backref='parent')
 
-# define a Function model with the FunctionMixin
+# subclass `FunctionMixin` to define a Function model
 class Function(FunctionMixin, Base):
     __tablename__ = 'function'
     id = Column(Integer, primary_key=True)
@@ -74,17 +85,18 @@ Base.metadata.create_all(engine)
 We can now set the `functions` attribute to a callable as follows.
 
 ```python
-def foo(parent, *args, **kwargs):
-    print('My parent is', parent)
+def foo(*args, **kwargs):
     print('My args are', args)
     print('My kwargs are', kwargs)
     return 'return value'
 
+parent = Parent()
 parent.functions = foo
 # equivalent to:
 # parent.functions = [foo]
-# parent.functions = Function(func=foo)
-print(parent.functions)
+# parent.functions = Function(foo)
+# parent.functions = [Function(foo)]
+parent.functions
 ```
 
 Out:

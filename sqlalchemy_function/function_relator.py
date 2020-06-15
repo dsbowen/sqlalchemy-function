@@ -1,3 +1,5 @@
+"""# Function relator mixin"""
+
 from .function_mixin import FunctionMixin
 
 from sqlalchemy import Column, Integer, PickleType
@@ -6,8 +8,9 @@ from sqlalchemy_mutable import MutableListType, MutableDictType
 
 class FunctionRelator():
     """
-    Base for database models with relationships to Function models. It provides 
-    automatic conversion of functions to Function models when setting attributes.
+    Base for database models with relationships to Function models. It 
+    provides automatic conversion of functions to Function models when 
+    setting attributes.
 
     Examples
     --------
@@ -18,26 +21,24 @@ class FunctionRelator():
     ```python
     from sqlalchemy_function import FunctionMixin, FunctionRelator
 
+    # standard session creation
     from sqlalchemy import create_engine, Column, ForeignKey, Integer
     from sqlalchemy.orm import relationship, sessionmaker, scoped_session
     from sqlalchemy.ext.declarative import declarative_base
 
-    # standard session creation
     engine = create_engine('sqlite:///:memory:')
     session_factory = sessionmaker(bind=engine)
     Session = scoped_session(session_factory)
     session = Session()
     Base = declarative_base()
 
-    # define a Parent model with the FunctionRelator
+    # subclass `FunctionRelator` for models with a relationship to Function models
     class Parent(FunctionRelator, Base):
     \    __tablename__ = 'parent'
     \    id = Column(Integer, primary_key=True)
-
-    \    # Fuction models must reference their parent with a `parent` attribute
     \    functions = relationship('Function', backref='parent')
 
-    # define a Function model with the FunctionMixin
+    # subclass `FunctionMixin` to define a Function model
     class Function(FunctionMixin, Base):
     \    __tablename__ = 'function'
     \    id = Column(Integer, primary_key=True)
@@ -49,17 +50,18 @@ class FunctionRelator():
     We can now set the `functions` attribute to a callable as follows.
 
     ```python
-    def foo(parent, *args, **kwargs):
-    \    print('My parent is', parent)
+    def foo(*args, **kwargs):
     \    print('My args are', args)
     \    print('My kwargs are', kwargs)
     \    return 'return value'
     
+    parent = Parent()
     parent.functions = foo
     # equivalent to:
     # parent.functions = [foo]
-    # parent.functions = Function(func=foo)
-    print(parent.functions)
+    # parent.functions = Function(foo)
+    # parent.functions = [Function(foo)]
+    parent.functions
     ```
 
     Out:
@@ -100,7 +102,9 @@ class FunctionRelator():
     def __setattr__(self, name, value):
         """Set attribute
 
-        Before setting an attribute, determine if it the attribute is a relationship to a Function model. If so, convert the value from a function(s) to a Function model(s).
+        Before setting an attribute, determine if it the attribute is a 
+        relationship to a Function model. If so, convert the value from a 
+        function(s) to a Function model(s).
         """
         if name in self._exempt_attrs_fr:
             return super().__setattr__(name, value)
@@ -166,7 +170,7 @@ class FunctionRelator():
         if isinstance(func, model_class):
             return func
         if callable(func):
-            return model_class(self, func)
+            return model_class(func)
         if func is None:
             return None
         raise ValueError(
