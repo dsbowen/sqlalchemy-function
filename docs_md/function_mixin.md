@@ -125,7 +125,42 @@ My kwargs are {'goodbye': 'moon'}
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L89">[source]</a>
+    <i></i> <b>set</b>(<i>self, func, *args, **kwargs</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L88">[source]</a>
+</p>
+
+Set the function, arguments, and keyword arguments.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>func : <i>callable or None, default=None</i></b>
+<p class="attr">
+    The function which the Function model will execute when called.
+</p>
+<b>*args, **kwargs : <i></i></b>
+<p class="attr">
+    Arguments and keyword arguments which the Function model will pass into its <code>func</code> when called.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>sqlalchemy_function.FunctionMixin</i></b>
+<p class="attr">
+    
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+
+
+
+
+<p class="func-header">
+    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L108">[source]</a>
 </p>
 
 Call `self.func`, passing in `*self.args, **self.kwargs`.

@@ -82,9 +82,28 @@ class FunctionMixin():
     kwargs = Column(MutableDictType)
 
     def __init__(self, func, *args, **kwargs):
-        self.func = func
-        self.args, self.kwargs = list(args), kwargs
+        self.set(func, *args, **kwargs)
         super().__init__()
+
+    def set(self, func, *args, **kwargs):
+        """
+        Set the function, arguments, and keyword arguments.
+
+        Parameters
+        ----------
+        func : callable or None, default=None
+            The function which the Function model will execute when called.
+
+        \*args, \*\*kwargs :
+            Arguments and keyword arguments which the Function model will pass 
+            into its `func` when called.
+
+        Returns
+        -------
+        self : sqlalchemy_function.FunctionMixin
+        """
+        self.func, self.args, self.kwargs = func, list(args), kwargs
+        return self
     
     def __call__(self):
         """
