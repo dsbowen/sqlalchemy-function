@@ -110,20 +110,37 @@ class FunctionMixin():
         self.func, self.args, self.kwargs = func, list(args), kwargs
         return self
     
-    def __call__(self):
+    def __call__(self, *args, **kwargs):
         """
-        Call `self.func`, passing in `*self.args, **self.kwargs`.
+        Call `self.func`, passing in `*self.args, **self.kwargs`. 
+        
+        Additional arguments passed to `self.__call__` are prepended to 
+        `self.args`, and additional keyword arguments update `self.kwargs` 
+        before passing to `self.func`. The function call is essentially:
 
-        **Note.** If the arguments or keyword arguments contain database 
-        models, they will be 'unshelled' when they are passed into the 
-        function. See <https://dsbowen.github.io/sqlalchemy-mutable/> for more
-        detail.
+        ```python
+        kwargs_ = self.kwargs.copy()
+        kwargs_.update(kwargs)
+        self.__call__(*args, *self.args, **kwargs_)
+        ```
+
+        Parameters
+        ----------
+        \*args, \*\*kwargs : 
+            Additional arguments and keyword arguments passed to `self.func`. 
 
         Returns
         -------
         output : 
             Output of `self.func`.
+
+        Notes
+        -----
+        If the arguments or keyword arguments contain database models, they 
+        will be 'unshelled' when they are passed into the function. See 
+        <https://dsbowen.github.io/sqlalchemy-mutable/> for more detail.
         """
-        if self.func is None:
-            return
-        return self.func(*self.args.unshell(), **self.kwargs.unshell())
+        if self.func is not None:
+            kwargs_ = self.kwargs.unshell()
+            kwargs_.update(kwargs)
+            return self.func(*args, *self.args.unshell(), **kwargs_)

@@ -160,21 +160,33 @@ Set the function, arguments, and keyword arguments.
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L113">[source]</a>
+    <i></i> <b>__call__</b>(<i>self, *args, **kwargs</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/sqlalchemy-function/sqlalchemy_function/function_mixin.py#L113">[source]</a>
 </p>
 
 Call `self.func`, passing in `*self.args, **self.kwargs`.
 
-**Note.** If the arguments or keyword arguments contain database
-models, they will be 'unshelled' when they are passed into the
-function. See <https://dsbowen.github.io/sqlalchemy-mutable/> for more
-detail.
+Additional arguments passed to `self.__call__` are prepended to
+`self.args`, and additional keyword arguments update `self.kwargs`
+before passing to `self.func`. The function call is essentially:
+
+```python
+kwargs_ = self.kwargs.copy()
+kwargs_.update(kwargs)
+self.__call__(*args, *self.args, **kwargs_)
+```
 
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
     <col class="field-body" />
     <tbody valign="top">
         <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*args, **kwargs : <i></i></b>
+<p class="attr">
+    Additional arguments and keyword arguments passed to <code>self.func</code>.
+</p></td>
+</tr>
+<tr class="field">
     <th class="field-name"><b>Returns:</b></td>
     <td class="field-body" width="100%"><b>output : <i></i></b>
 <p class="attr">
@@ -184,3 +196,8 @@ detail.
     </tbody>
 </table>
 
+####Notes
+
+If the arguments or keyword arguments contain database models, they
+will be 'unshelled' when they are passed into the function. See
+<https://dsbowen.github.io/sqlalchemy-mutable/> for more detail.
